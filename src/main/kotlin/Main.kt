@@ -6,5 +6,5 @@ fun main(args: Array<String>) {
     val inputList = dayOne.readValuesFromFile(filePath)
     val result = dayOne.sumCalibrationValues(inputList)
 
-    println("Day One, Part One: The sum of calibration values is: $result")
+    println("Day One: the sum of calibration values is: $result")
 }

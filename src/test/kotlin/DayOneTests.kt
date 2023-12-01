@@ -58,4 +58,36 @@ class DayOneTests {
 
         assertTrue(exception.message!!.contains("File not found"))
     }
+
+    // Part Two
+
+    @Test
+    fun `parseLine when given an input with two words spelling digits in them returns the numerical value of the two digits`() {
+        assertEquals(83, dayOne.parseLine("eightwothree"))
+    }
+
+    @Test
+    fun `parseLine when given an input with two words spelling digits as well as a number in it returns the numerical value of the two digits`() {
+        assertEquals(13, dayOne.parseLine("abcone2threexyz"))
+    }
+
+    @Test
+    fun `parseLine when given an input with only two words spelling digits as well as a single number in it returns the numerical value of the two digits`() {
+        assertEquals(29, dayOne.parseLine("two1nine"))
+    }
+
+    @Test
+    fun `parseLine when given an input with a digit at the start and end with words spelling digits in the middle returns the digits`() {
+        assertEquals(42, dayOne.parseLine("4nineeightseven2"))
+    }
+
+    @Test
+    fun `sumCalibrationValues must calculate the sum of the parsed spelled out inputs`() {
+        val calibrationValues = listOf(
+            "two1nine", "eightwothree", "abcone2threexyz",
+            "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"
+        )
+
+        assertEquals(281, dayOne.sumCalibrationValues(calibrationValues))
+    }
 }
