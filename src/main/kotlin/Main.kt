@@ -1,7 +1,10 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    //Day One
+    val dayOne = DayOne()
+    val filePath = "src/inputs/day_one.txt"
+    val inputList = dayOne.readValuesFromFile(filePath)
+    val result = dayOne.sumCalibrationValues(inputList)
+
+    println("Day One, Part One: The sum of calibration values is: $result")
 }
