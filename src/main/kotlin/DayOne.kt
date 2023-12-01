@@ -3,23 +3,31 @@ import java.nio.file.Paths
 
 class DayOne {
 
-    private val digitMap = mapOf(
-        "one" to 1, "two" to 2, "three" to 3, "four" to 4,
+    private val digitMapping = mapOf(
+        "zero" to 0, "one" to 1, "two" to 2, "three" to 3, "four" to 4,
         "five" to 5, "six" to 6, "seven" to 7, "eight" to 8, "nine" to 9
-    )
+    ).plus((0..9).associateBy { it.toString() })
 
     fun parseLine(line: String): Int {
-        val digits = extractDigits(line)
-        val firstDigit = digits.firstOrNull() ?: 0
-        val lastDigit = digits.lastOrNull() ?: 0
+        val firstDigit = findFirstNum(line, false) ?: 0
+        val lastDigit = findFirstNum(line.reversed(), true) ?: 0
         return firstDigit * 10 + lastDigit
     }
 
-    fun extractDigits(line: String): List<Int> {
-        val regex = Regex("one|two|three|four|five|six|seven|eight|nine|\\d")
-        return regex.findAll(line).mapNotNull { match ->
-            digitMap[match.value] ?: match.value.toIntOrNull()
-        }.toList()
+    private fun findFirstNum(line: String, reversed: Boolean): Int? {
+        var bestMatch: Int? = null
+        var bestIdx = line.length
+
+        for ((key, value) in digitMapping) {
+            val searchKey = if (reversed) key.reversed() else key
+            val idx = line.indexOf(searchKey)
+            if (idx in 0..<bestIdx) {
+                bestIdx = idx
+                bestMatch = value
+            }
+        }
+
+        return bestMatch
     }
 
     fun sumCalibrationValues(input: List<String>): Int {
