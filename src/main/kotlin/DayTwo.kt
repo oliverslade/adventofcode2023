@@ -3,8 +3,8 @@ import java.io.File
 class DayTwo {
     fun solve(input: List<String>): Int {
         return input.mapNotNull { parseGame(it) }
-            .filter { isGamePossible(it.second) }
-            .sumOf { it.first }
+            .map { calculateMinimumCubes(it.second) }
+            .sumOf { it.red * it.green * it.blue }
     }
 
     private fun parseGame(line: String): Pair<Int, List<CubeCombination>>? {
@@ -27,11 +27,12 @@ class DayTwo {
         return CubeCombination(counts["red"]!!, counts["green"]!!, counts["blue"]!!)
     }
 
-    private fun isGamePossible(combinations: List<CubeCombination>): Boolean {
-        val maxCubes = CubeCombination(12, 13, 14)
-        return combinations.all {
-            it.red <= maxCubes.red && it.green <= maxCubes.green && it.blue <= maxCubes.blue
-        }
+    private fun calculateMinimumCubes(combinations: List<CubeCombination>): CubeCombination {
+        val maxRed = combinations.maxOfOrNull { it.red } ?: 0
+        val maxGreen = combinations.maxOfOrNull { it.green } ?: 0
+        val maxBlue = combinations.maxOfOrNull { it.blue } ?: 0
+
+        return CubeCombination(maxRed, maxGreen, maxBlue)
     }
 
     fun readGamesFromFile(filePath: String): List<String> {
