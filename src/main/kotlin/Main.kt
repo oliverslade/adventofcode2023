@@ -4,7 +4,14 @@ fun main(args: Array<String>) {
     val dayOne = DayOne()
     val filePath = "src/inputs/day_one.txt"
     val inputList = dayOne.readValuesFromFile(filePath)
-    val result = dayOne.sumCalibrationValues(inputList)
+    val dayOneResult = dayOne.sumCalibrationValues(inputList)
 
-    println("Day One: the sum of calibration values is: $result")
+    println("Day One: the sum of calibration values is: $dayOneResult")
+
+    //Day two
+    val dayTwo = DayTwo()
+    val dayTwoFilePath = "src/inputs/day_two.txt"
+    val games = dayTwo.readGamesFromFile(dayTwoFilePath)
+    val result = dayTwo.solve(games)
+    println("Sum of IDs of possible games: $result")
 }
