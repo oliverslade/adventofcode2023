@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
     //Day four
     val dayFour = DayFour()
     val dayFourFilePath = "src/inputs/day_four.txt"
-    val cards = dayFour.readScratchcardsFromFile(dayFourFilePath)
-    val totalPoints = dayFour.calculateTotalPoints(cards)
-    println("Day Four: Total points: $totalPoints")
+    val scratchcards = dayFour.readScratchcardsFromFile(dayFourFilePath)
+    val totalCards = dayFour.calculateTotalCards(scratchcards)
+    println("Day Four: Total scratchcards: $totalCards")
 }
