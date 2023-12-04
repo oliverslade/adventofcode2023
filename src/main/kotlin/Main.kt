@@ -13,5 +13,12 @@ fun main(args: Array<String>) {
     val dayTwoFilePath = "src/inputs/day_two.txt"
     val games = dayTwo.readGamesFromFile(dayTwoFilePath)
     val result = dayTwo.solve(games)
-    println("Sum of IDs of possible games: $result")
+    println("Day Two: Sum of IDs of possible games: $result")
+
+    //Day three
+    val dayThree = DayThree()
+    val dayThreeFilePath = "src/inputs/day_three.txt"
+    val schematics = dayThree.readSchematicFromFile(dayThreeFilePath)
+    val sum = dayThree.calculateTotalGearRatios(schematics)
+    println("Day Three: Sum of all part numbers: $sum")
 }
