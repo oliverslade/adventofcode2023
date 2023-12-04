@@ -21,4 +21,11 @@ fun main(args: Array<String>) {
     val schematics = dayThree.readSchematicFromFile(dayThreeFilePath)
     val sum = dayThree.calculateTotalGearRatios(schematics)
     println("Day Three: Sum of all part numbers: $sum")
+
+    //Day four
+    val dayFour = DayFour()
+    val dayFourFilePath = "src/inputs/day_four.txt"
+    val cards = dayFour.readScratchcardsFromFile(dayFourFilePath)
+    val totalPoints = dayFour.calculateTotalPoints(cards)
+    println("Day Four: Total points: $totalPoints")
 }
