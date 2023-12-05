@@ -8,39 +8,19 @@ class DayFiveTests {
 
     @Test
     fun `findLowestLocation with basic scenario`() {
-        val seeds = listOf(79L, 14L, 55L, 13L)
+        val seedRanges = listOf(Pair(79L, 14L), Pair(55L, 13L))
         val mappings = mapOf(
-            "seed-to-soil" to listOf(
-                Triple(50L, 98L, 2L),
-                Triple(52L, 50L, 48L)
-            ),
-            "soil-to-fertilizer" to listOf(
-                Triple(0L, 0L, 50L),
-                Triple(52L, 50L, 48L)
-            ),
-            "fertilizer-to-water" to listOf(
-                Triple(0L, 0L, 52L),
-                Triple(53L, 52L, 48L)
-            ),
-            "water-to-light" to listOf(
-                Triple(0L, 0L, 53L),
-                Triple(54L, 53L, 47L)
-            ),
-            "light-to-temperature" to listOf(
-                Triple(0L, 0L, 54L),
-                Triple(55L, 54L, 46L)
-            ),
-            "temperature-to-humidity" to listOf(
-                Triple(0L, 0L, 55L),
-                Triple(56L, 55L, 45L)
-            ),
-            "humidity-to-location" to listOf(
-                Triple(60L, 56L, 37L)
-            )
+            "seed-to-soil" to listOf(Triple(50L, 98L, 2L), Triple(52L, 50L, 48L)),
+            "soil-to-fertilizer" to listOf(Triple(0L, 15L, 37L), Triple(37L, 52L, 2L), Triple(39L, 0L, 15L)),
+            "fertilizer-to-water" to listOf(Triple(49L, 53L, 8L), Triple(0L, 11L, 42L), Triple(42L, 0L, 7L), Triple(57L, 7L, 4L)),
+            "water-to-light" to listOf(Triple(88L, 18L, 7L), Triple(18L, 25L, 70L)),
+            "light-to-temperature" to listOf(Triple(45L, 77L, 23L), Triple(81L, 45L, 19L), Triple(68L, 64L, 13L)),
+            "temperature-to-humidity" to listOf(Triple(0L, 69L, 1L), Triple(1L, 0L, 69L)),
+            "humidity-to-location" to listOf(Triple(60L, 56L, 37L), Triple(56L, 93L, 4L))
         )
 
-        val result = dayFive.findLowestLocation(seeds, mappings)
-        assertEquals(13L, result)
+        val result = dayFive.findLowestLocation(seedRanges, mappings)
+        assertEquals(46L, result)
     }
 
 

@@ -1,20 +1,28 @@
 class DayFive {
-    fun findLowestLocation(seeds: List<Long>, mappings: Map<String, List<Triple<Long, Long, Long>>>): Long {
+
+    fun findLowestLocation(seedRanges: List<Pair<Long, Long>>, mappings: Map<String, List<Triple<Long, Long, Long>>>): Long {
         var lowestLocation = Long.MAX_VALUE
-        for (seed in seeds) {
-            var location = seed
-            location = convertNumber(location, mappings["seed-to-soil"]!!)
-            location = convertNumber(location, mappings["soil-to-fertilizer"]!!)
-            location = convertNumber(location, mappings["fertilizer-to-water"]!!)
-            location = convertNumber(location, mappings["water-to-light"]!!)
-            location = convertNumber(location, mappings["light-to-temperature"]!!)
-            location = convertNumber(location, mappings["temperature-to-humidity"]!!)
-            location = convertNumber(location, mappings["humidity-to-location"]!!)
-            if (location < lowestLocation) {
-                lowestLocation = location
+
+        for ((seedStart, rangeLength) in seedRanges) {
+            for (offset in 0..<rangeLength) {
+                val seed = seedStart + offset
+                var location = convertThroughMappings(seed, mappings)
+
+                if (location < lowestLocation) {
+                    lowestLocation = location
+                }
             }
         }
+
         return lowestLocation
+    }
+
+    private fun convertThroughMappings(number: Long, mappings: Map<String, List<Triple<Long, Long, Long>>>): Long {
+        var currentNumber = number
+        for (mapping in mappings.values) {
+            currentNumber = convertNumber(currentNumber, mapping)
+        }
+        return currentNumber
     }
 
     private fun convertNumber(number: Long, mapping: List<Triple<Long, Long, Long>>): Long {

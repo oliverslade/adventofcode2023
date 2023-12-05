@@ -32,18 +32,19 @@ fun main(args: Array<String>) {
     println("Day Four: Total scratchcards: $totalCards")
 
     //Day five
-    val input = File("src/inputs/day_five.txt").readText()
+    val dayFiveFilePath = "src/inputs/day_five.txt"
     val dayFive = DayFive()
+    val fileContent = File(dayFiveFilePath).readText()
 
-    val (seedsString, mappingsString) = input.split("\n\n", limit = 2)
-    val seeds = seedsString
-        .split(":")[1]
-        .trim()
-        .split(" ")
-        .filter { it.isNotBlank() }
-        .map { it.toLong() }
-    val mappings = dayFive.parseAlmanac(mappingsString)
+    val almanacSections = fileContent.split("\n\n")
+    val seedSection = almanacSections.first()
+    val seedData = seedSection.substringAfter("seeds:").trim()
+    val seedRanges = seedData.split(" ")
+        .windowed(2, 2)
+        .map { (start, length) -> start.toLong() to length.toLong() }
 
-    val lowestLocation = dayFive.findLowestLocation(seeds, mappings)
-    println("Day Five: Lowest location number: $lowestLocation")
+    val mappings = dayFive.parseAlmanac(almanacSections.drop(1).joinToString("\n\n"))
+
+    val lowestLocation = dayFive.findLowestLocation(seedRanges, mappings)
+    println("Day Five: The lowest location number is: $lowestLocation")
 }
