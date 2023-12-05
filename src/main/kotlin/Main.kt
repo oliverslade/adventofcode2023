@@ -1,3 +1,5 @@
+import java.io.File
+
 fun main(args: Array<String>) {
 
     //Day One
@@ -28,4 +30,20 @@ fun main(args: Array<String>) {
     val scratchcards = dayFour.readScratchcardsFromFile(dayFourFilePath)
     val totalCards = dayFour.calculateTotalCards(scratchcards)
     println("Day Four: Total scratchcards: $totalCards")
+
+    //Day five
+    val input = File("src/inputs/day_five.txt").readText()
+    val dayFive = DayFive()
+
+    val (seedsString, mappingsString) = input.split("\n\n", limit = 2)
+    val seeds = seedsString
+        .split(":")[1]
+        .trim()
+        .split(" ")
+        .filter { it.isNotBlank() }
+        .map { it.toLong() }
+    val mappings = dayFive.parseAlmanac(mappingsString)
+
+    val lowestLocation = dayFive.findLowestLocation(seeds, mappings)
+    println("Day Five: Lowest location number: $lowestLocation")
 }
