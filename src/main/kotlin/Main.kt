@@ -1,6 +1,6 @@
 import java.io.File
 
-fun main(args: Array<String>) {
+fun main() {
 
     //Day One
     val dayOne = DayOne()
@@ -45,6 +45,14 @@ fun main(args: Array<String>) {
 
     val mappings = dayFive.parseAlmanac(almanacSections.drop(1).joinToString("\n\n"))
 
-    val lowestLocation = dayFive.findLowestLocation(seedRanges, mappings)
-    println("Day Five: The lowest location number is: $lowestLocation")
+    //val lowestLocation = dayFive.findLowestLocation(seedRanges, mappings)
+    //println("Day Five: The lowest location number is: $lowestLocation")
+
+    //Day six
+    val daySixFilePath = "src/inputs/day_six.txt"
+
+    val daySix = DaySix()
+    val races = daySix.readRacesFromFile(daySixFilePath)
+    val waysToWin = daySix.calculateWaysToWin(races)
+    println("Day Six: Total of the ways to win: $waysToWin")
 }
