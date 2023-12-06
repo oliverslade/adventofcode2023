@@ -2,24 +2,20 @@ import java.io.File
 
 class DaySix {
 
-    fun readRacesFromFile(filePath: String): List<Pair<Int, Int>> {
-        val file = File(filePath)
-        val lines = file.readLines()
-        val times = lines[0].substringAfter("Time:").trim().split("\\s+".toRegex()).map { it.toInt() }
-        val distances = lines[1].substringAfter("Distance:").trim().split("\\s+".toRegex()).map { it.toInt() }
-
-        return times.zip(distances)
+    fun calculateWaysToWinSingleRaceFromFile(filePath: String): Long {
+        val lines = File(filePath).readLines()
+        val (time, distance) = lines.map { it.filter { char -> char.isDigit() }.toLong() }
+        return calculateWaysToWinSingleRace(time, distance)
     }
 
-    fun calculateWaysToWin(races: List<Pair<Int, Int>>): Long {
-        return races.map { (time, distance) -> calculateWaysForSingleRace(time, distance) }.reduce { acc, ways -> acc * ways }
-    }
-
-    private fun calculateWaysForSingleRace(time: Int, record: Int): Long {
+    internal fun calculateWaysToWinSingleRace(time: Long, distance: Long): Long {
         var waysToWin = 0L
-        for (holdTime in 0..<time) {
-            val distance = holdTime * (time - holdTime)
-            if (distance > record) waysToWin++
+        for (buttonTime in 1..<time) {
+            val travelTime = time - buttonTime
+            val traveledDistance = buttonTime * travelTime
+            if (traveledDistance > distance) {
+                waysToWin++
+            }
         }
         return waysToWin
     }

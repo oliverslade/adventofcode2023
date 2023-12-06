@@ -1,39 +1,37 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class DaySixTest {
+internal class DaySixTest {
 
     private val daySix = DaySix()
 
     @Test
-    fun `calculateWaysToWin with basic scenario`() {
-        val races = listOf(
-            Pair(7, 9),
-            Pair(15, 40),
-            Pair(30, 200)
-        )
-        val result = daySix.calculateWaysToWin(races)
-        assertEquals(288L, result)
+    fun `Calculate ways to win for a short race`() {
+        val time = 7L
+        val distance = 9L
+        val expectedWays = 4L
+
+        val result = daySix.calculateWaysToWinSingleRace(time, distance)
+        assertEquals(expectedWays, result)
     }
 
     @Test
-    fun `calculateWaysToWin with single race`() {
-        val races = listOf(Pair(56, 334))
-        val result = daySix.calculateWaysToWin(races)
-        val expectedResult = 43L
-            assertEquals(expectedResult, result)
+    fun `Calculate ways to win for a longer race`() {
+        val time = 71530L
+        val distance = 940200L
+        val expectedWays = 71503L
+
+        val result = daySix.calculateWaysToWinSingleRace(time, distance)
+        assertEquals(expectedWays, result)
     }
 
     @Test
-    fun `calculateWaysToWin with multiple races`() {
-        val races = listOf(
-            Pair(56, 334),
-            Pair(71, 1135),
-            Pair(79, 1350),
-            Pair(99, 2430)
-        )
-        val result = daySix.calculateWaysToWin(races)
-        val expectedResult = 211904L
-            assertEquals(expectedResult, result)
+    fun `Calculate ways to win for a race with no possible wins`() {
+        val time = 5L
+        val distance = 100L
+        val expectedWays = 0L
+
+        val result = daySix.calculateWaysToWinSingleRace(time, distance)
+        assertEquals(expectedWays, result)
     }
 }
