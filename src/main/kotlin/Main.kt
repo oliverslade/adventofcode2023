@@ -62,8 +62,8 @@ fun main() {
     val lines = Files.readAllLines(dayEightPaths)
 
     val dayEight = DayEight()
-    val steps = dayEight.navigate(lines)
-    println("Day Eight: Steps to reach ZZZ: $steps")
+    val steps = dayEight.navigateAsGhost(lines)
+    println("Day Eight: Steps taken: $steps")
 
     //Day nine
     val dayNineInput = File("src/inputs/day_nine.txt").readLines()

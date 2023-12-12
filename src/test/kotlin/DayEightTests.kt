@@ -1,38 +1,42 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class DayEightTests {
+class DayEightTests {
 
     private val dayEight = DayEight()
 
     @Test
-    fun `navigate returns correct step count for example input 1`() {
+    fun `navigateAsGhost with simple input`() {
         val input = listOf(
-            "RL",
-            "AAA = (BBB, CCC)",
-            "BBB = (DDD, EEE)",
-            "CCC = (ZZZ, GGG)",
-            "DDD = (DDD, DDD)",
-            "EEE = (EEE, EEE)",
-            "GGG = (GGG, GGG)",
-            "ZZZ = (ZZZ, ZZZ)"
+            "LR",
+            "11A = (11B, XXX)",
+            "11B = (XXX, 11Z)",
+            "11Z = (11B, XXX)",
+            "22A = (22B, XXX)",
+            "22B = (22C, 22C)",
+            "22C = (22Z, 22Z)",
+            "22Z = (22B, 22B)",
+            "XXX = (XXX, XXX)"
         )
 
-        val result = dayEight.navigate(input)
-        assertEquals(2, result)
-    }
-
-    @Test
-    fun `navigate returns correct step count for example input 2`() {
-        val input = listOf(
-            "LLR",
-            "AAA = (BBB, BBB)",
-            "BBB = (AAA, ZZZ)",
-            "ZZZ = (ZZZ, ZZZ)"
-        )
-
-        val result = dayEight.navigate(input)
+        val result = dayEight.navigateAsGhost(input)
         assertEquals(6, result)
     }
 
+    @Test
+    fun `startFromPoint with specific path`() {
+        val nodes = mapOf(
+            "AAA" to ("BBB" to "CCC"),
+            "BBB" to ("DDD" to "EEE"),
+            "CCC" to ("ZZZ" to "GGG"),
+            "DDD" to ("DDD" to "DDD"),
+            "EEE" to ("EEE" to "EEE"),
+            "GGG" to ("GGG" to "GGG"),
+            "ZZZ" to ("ZZZ" to "ZZZ")
+        )
+        val instructions = "RL"
+
+        val result = dayEight.startFromPoint("AAA", instructions, nodes)
+        assertEquals(2, result)
+    }
 }
