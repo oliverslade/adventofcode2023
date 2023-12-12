@@ -58,6 +58,6 @@ fun main() {
     //Day nine
     val input = File("src/inputs/day_nine.txt").readLines()
     val dayNine = DayNine()
-    val sumOfValues = dayNine.calculateSumOfNextValues(input)
+    val sumOfValues = dayNine.calculateSumOfPreviousValues(input)
     println("Day Nine: Sum of extrapolated values: $sumOfValues")
 }

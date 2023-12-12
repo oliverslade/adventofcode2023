@@ -6,37 +6,34 @@ internal class DayNineTest {
     private val dayNine = DayNine()
 
     @Test
-    fun `calculate sum of next values for simple increasing sequence`() {
-        val input = listOf("0 1 2 3 4")
+    fun `test calculateSumOfPreviousValues with single line`() {
+        val input = listOf("10 15 20 25 30")
         val expected = 5L
-        assertEquals(expected, dayNine.calculateSumOfNextValues(input))
+        assertEquals(expected, dayNine.calculateSumOfPreviousValues(input))
     }
 
     @Test
-    fun `calculate sum of next values for complex sequence`() {
-        val input = listOf("3 6 10 15 21")
-        val expected = 28L
-        assertEquals(expected, dayNine.calculateSumOfNextValues(input))
-    }
-
-    @Test
-    fun `calculate sum of next values for constant sequence`() {
-        val input = listOf("5 5 5 5")
+    fun `test calculateSumOfPreviousValues with multiple lines`() {
+        val input = listOf(
+            "10 15 20 25 30",
+            "5 10 15 20 25 30",
+            "1 4 9 16 25"
+        )
         val expected = 5L
-        assertEquals(expected, dayNine.calculateSumOfNextValues(input))
+        assertEquals(expected, dayNine.calculateSumOfPreviousValues(input))
     }
 
     @Test
-    fun `calculate sum of next values for decreasing sequence`() {
-        val input = listOf("10 8 6 4 2")
-        val expected = 0L
-        assertEquals(expected, dayNine.calculateSumOfNextValues(input))
+    fun `test findPreviousValues with simple sequence`() {
+        val values = listOf(10L, 15L, 20L, 25L, 30L)
+        val expected = listOf(10L, 15L, 20L, 25L, 30L, 5L)
+        assertEquals(expected, dayNine.findPreviousValues(values))
     }
 
     @Test
-    fun `calculate sum of next values for mixed sequence`() {
-        val input = listOf("1 4 9 16 25")
-        val expected = 36L
-        assertEquals(expected, dayNine.calculateSumOfNextValues(input))
+    fun `test findPreviousValues with complex sequence`() {
+        val values = listOf(1L, 4L, 9L, 16L, 25L)
+        val expected = listOf(1L, 4L, 9L, 16L, 25L, 0L)
+        assertEquals(expected, dayNine.findPreviousValues(values))
     }
 }
