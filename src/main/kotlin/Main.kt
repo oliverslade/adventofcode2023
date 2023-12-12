@@ -32,21 +32,21 @@ fun main() {
     println("Day Four: Total scratchcards: $totalCards")
 
     //Day five
-    val dayFiveFilePath = "src/inputs/day_five.txt"
-    val dayFive = DayFive()
-    val fileContent = File(dayFiveFilePath).readText()
-
-    val almanacSections = fileContent.split("\n\n")
-    val seedSection = almanacSections.first()
-    val seedData = seedSection.substringAfter("seeds:").trim()
-    val seedRanges = seedData.split(" ")
-        .windowed(2, 2)
-        .map { (start, length) -> start.toLong() to length.toLong() }
-
-    val mappings = dayFive.parseAlmanac(almanacSections.drop(1).joinToString("\n\n"))
-
-    val lowestLocation = dayFive.findLowestLocation(seedRanges, mappings)
-    println("Day Five: The lowest location number is: $lowestLocation")
+//    val dayFiveFilePath = "src/inputs/day_five.txt"
+//    val dayFive = DayFive()
+//    val fileContent = File(dayFiveFilePath).readText()
+//
+//    val almanacSections = fileContent.split("\n\n")
+//    val seedSection = almanacSections.first()
+//    val seedData = seedSection.substringAfter("seeds:").trim()
+//    val seedRanges = seedData.split(" ")
+//        .windowed(2, 2)
+//        .map { (start, length) -> start.toLong() to length.toLong() }
+//
+//    val mappings = dayFive.parseAlmanac(almanacSections.drop(1).joinToString("\n\n"))
+//
+//    val lowestLocation = dayFive.findLowestLocation(seedRanges, mappings)
+//    println("Day Five: The lowest location number is: $lowestLocation")
 
     //Day six
     val daySixFilePath = "src/inputs/day_six.txt"
@@ -54,4 +54,10 @@ fun main() {
     val daySix = DaySix()
     val waysToWin = daySix.calculateWaysToWinSingleRaceFromFile(daySixFilePath)
     println("Day Six: Number of ways to win the race: $waysToWin")
+
+    //Day nine
+    val input = File("src/inputs/day_nine.txt").readLines()
+    val dayNine = DayNine()
+    val sumOfValues = dayNine.calculateSumOfNextValues(input)
+    println("Day Nine: Sum of extrapolated values: $sumOfValues")
 }
