@@ -1,4 +1,6 @@
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 
 fun main() {
 
@@ -55,9 +57,17 @@ fun main() {
     val waysToWin = daySix.calculateWaysToWinSingleRaceFromFile(daySixFilePath)
     println("Day Six: Number of ways to win the race: $waysToWin")
 
+    //Day eight
+    val dayEightPaths = Paths.get("src/inputs/day_eight.txt")
+    val lines = Files.readAllLines(dayEightPaths)
+
+    val dayEight = DayEight()
+    val steps = dayEight.navigate(lines)
+    println("Day Eight: Steps to reach ZZZ: $steps")
+
     //Day nine
-    val input = File("src/inputs/day_nine.txt").readLines()
+    val dayNineInput = File("src/inputs/day_nine.txt").readLines()
     val dayNine = DayNine()
-    val sumOfValues = dayNine.calculateSumOfPreviousValues(input)
+    val sumOfValues = dayNine.calculateSumOfPreviousValues(dayNineInput)
     println("Day Nine: Sum of extrapolated values: $sumOfValues")
 }
